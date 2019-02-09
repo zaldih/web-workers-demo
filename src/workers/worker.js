@@ -4,10 +4,10 @@ self.addEventListener("message", d => {
 });
 
 function calculate(numBase, limit) {
-  let toReturn = { base: numBase, result: [], worker: self };
+  let data = { base: numBase, result: [], worker: self };
   for (let i = 1; i < limit; ++i) {
-    toReturn.result.push(numBase * i);
+    data.result.push(numBase * i);
   }
 
-  return toReturn;
+  return data;
 }

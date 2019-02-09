@@ -4,7 +4,7 @@ const wcontroller = (function() {
   let jobQueue;
   // [1, 2, 3, 4, 5, 6, 7, 8, 9]
   let numberLimits;
-  let workersNumber;
+  let activeWorkers = 0;
   const performanceTime = { start: 0, end: 0 };
 
   function generateBtn() {
@@ -12,9 +12,8 @@ const wcontroller = (function() {
     performanceTime.start = performance.now();
     procesedData = [];
     jobQueue = _generateJobQueue(document.getElementById("tableSize").value);
-    workersNumber = document.getElementById("workersAmount").value;
     numberLimits = jobQueue.length;
-    _generateWorkers(workersNumber);
+    _generateWorkers(document.getElementById("workersAmount").value);
   }
 
   function _generateJobQueue(numTop) {
@@ -29,6 +28,7 @@ const wcontroller = (function() {
       workers.push(worker);
       worker.addEventListener("message", _workerJobFinished);
       _asingNewJob(worker);
+      activeWorkers += 1;
     }
 
     /* return new Promise((resolve, reject) => {
@@ -54,8 +54,8 @@ const wcontroller = (function() {
 
   function _killWorker(worker) {
     worker.terminate();
-    workersNumber -= 1;
-    if (!workersNumber) {
+    activeWorkers -= 1;
+    if (!activeWorkers) {
       _allJobFinished();
     }
   }
