@@ -4,6 +4,7 @@ const wcontroller = (function() {
   let jobQueue;
   // [1, 2, 3, 4, 5, 6, 7, 8, 9]
   let numberLimits;
+  let workersLimit;
   let activeWorkers = 0;
   const performanceTime = { start: 0, end: 0 };
 
@@ -12,8 +13,9 @@ const wcontroller = (function() {
     performanceTime.start = performance.now();
     procesedData = [];
     jobQueue = _generateJobQueue(document.getElementById("tableSize").value);
+    workersLimit = document.getElementById("workersAmount").value;
     numberLimits = jobQueue.length;
-    _generateWorkers(document.getElementById("workersAmount").value);
+    _generateWorkers(workersLimit);
   }
 
   function _generateJobQueue(numTop) {
@@ -62,10 +64,15 @@ const wcontroller = (function() {
 
   function _allJobFinished() {
     performanceTime.end = performance.now();
+    const timeMeasured = performanceTime.end - performanceTime.start;
     document.getElementById(
       "totalGenerateTime"
-    ).innerHTML = `Generated in ${performanceTime.end -
-      performanceTime.start} ms`;
+    ).innerHTML = `Generated in ${timeMeasured} ms`;
+
+    const logZone = document.getElementById("historyLog");
+    logZone.innerHTML =
+      `w:${workersLimit}|s:${numberLimits} -> ${timeMeasured}ms<br>` +
+      logZone.innerHTML;
   }
 
   function _generateTable() {

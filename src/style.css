@@ -10,14 +10,26 @@ td {
   padding: 10px;
   text-align: center;
 }
-
+fieldset{
+  padding: 0px;
+}
 .form {
   display: flex;
   width: 200px;
   flex-wrap: wrap;
 }
-.info{
+.info {
   display: inline-block;
+}
+.history-container {
+  position: absolute;  
+  left: 300px;
+  top: 5px;
+  font-family: "Courier New";
+}
+.history-log{    
+  max-height: 103px;
+  overflow-y:scroll
 }
 .table-container {
   width: 100%;
