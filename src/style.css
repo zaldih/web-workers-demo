@@ -1,0 +1,12 @@
+.left-column {
+  width: 200px;
+}
+
+.form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form input {
+  width: 100%;
+}

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Workers!</title>
+  </head>
+  <body>
+    <main>
+      <div class="left-column">
+        <div class="form">
+          <label for="">Workers amount: </label>
+          <input type="number" id="workersAmount" size="4" value="3" />
+          <br />
+          <label for="">Table size: </label>
+          <input type="number" id="tableSize" size="4" value="10" />
+          <button onclick="wcontroller.generateBtn()">Generate</button>
+        </div>
+      </div>
+      <div class="right-column">
+        <div id="tableContent"></div>
+      </div>
+    </main>
+  </body>
+  <script src="main.controller.js"></script>
+  <script>
+    wcontroller.generateBtn();
+  </script>
+</html>
