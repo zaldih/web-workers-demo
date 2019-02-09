@@ -9,7 +9,6 @@
   </head>
   <body>
     <main>
-      <div class="left-column">
         <div class="form">
           <label for="">Workers amount: </label>
           <input type="number" id="workersAmount" size="4" value="3" />
@@ -19,7 +18,11 @@
           <button onclick="wcontroller.generateBtn()">Generate</button>
         </div>
       </div>
-      <div class="right-column">
+      <div class="info">
+        <div id="totalGenerateTime"></div>
+      </div>
+      <br>
+      <div class="table-container">
         <div id="tableContent"></div>
       </div>
     </main>

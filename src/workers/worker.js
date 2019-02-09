@@ -5,7 +5,7 @@ self.addEventListener("message", d => {
 
 function calculate(numBase, limit) {
   let toReturn = { base: numBase, result: [], worker: self };
-  for (let i = 0; i < limit; ++i) {
+  for (let i = 1; i < limit; ++i) {
     toReturn.result.push(numBase * i);
   }
 

@@ -1,12 +1,30 @@
-.left-column {
-  width: 200px;
+body {
+  margin: 0px;
+}
+table {
+  border-collapse: collapse;
+}
+td {
+  border: 1px solid #aaaaaa;
+  margin: 0px;
+  padding: 10px;
+  text-align: center;
 }
 
 .form {
   display: flex;
+  width: 200px;
   flex-wrap: wrap;
 }
-
+.info{
+  display: inline-block;
+}
+.table-container {
+  width: 100%;
+  max-height: 80vh;
+  display: inline-block;
+  overflow: scroll;
+}
 .form input {
   width: 100%;
 }

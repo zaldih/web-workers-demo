@@ -4,12 +4,17 @@ const wcontroller = (function() {
   let jobQueue;
   // [1, 2, 3, 4, 5, 6, 7, 8, 9]
   let numberLimits;
+  let workersNumber;
+  const performanceTime = { start: 0, end: 0 };
 
   function generateBtn() {
+    document.getElementById("totalGenerateTime").innerHTML = "Generating...";
+    performanceTime.start = performance.now();
     procesedData = [];
     jobQueue = _generateJobQueue(document.getElementById("tableSize").value);
+    workersNumber = document.getElementById("workersAmount").value;
     numberLimits = jobQueue.length;
-    _generateWorkers(document.getElementById("workersAmount").value);
+    _generateWorkers(workersNumber);
   }
 
   function _generateJobQueue(numTop) {
@@ -20,7 +25,7 @@ const wcontroller = (function() {
     const workers = [];
 
     for (let i = 0; i < numWorkers; ++i) {
-      const worker = new Worker("./workers/worker.js");
+      const worker = new Worker("./workers/worker.js?name=#" + i);
       workers.push(worker);
       worker.addEventListener("message", _workerJobFinished);
       _asingNewJob(worker);
@@ -34,7 +39,6 @@ const wcontroller = (function() {
   }
 
   function _workerJobFinished(result) {
-    console.log("job finished:", result.data);
     procesedData.push(JSON.parse(result.data));
     _generateTable();
     if (jobQueue.length === 0) {
@@ -50,6 +54,18 @@ const wcontroller = (function() {
 
   function _killWorker(worker) {
     worker.terminate();
+    workersNumber -= 1;
+    if (!workersNumber) {
+      _allJobFinished();
+    }
+  }
+
+  function _allJobFinished() {
+    performanceTime.end = performance.now();
+    document.getElementById(
+      "totalGenerateTime"
+    ).innerHTML = `Generated in ${performanceTime.end -
+      performanceTime.start} ms`;
   }
 
   function _generateTable() {
@@ -64,7 +80,6 @@ const wcontroller = (function() {
     }, "");
 
     aaaa.innerHTML = "<table>" + table + "</table>";
-    console.log("Print done");
   }
 
   return { generateBtn };
