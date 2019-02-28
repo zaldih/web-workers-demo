@@ -26,18 +26,12 @@ const wcontroller = (function() {
     const workers = [];
 
     for (let i = 0; i < numWorkers; ++i) {
-      const worker = new Worker("./workers/worker.js?name=#" + i);
+      const worker = new Worker("./workers/worker.js");
       workers.push(worker);
       worker.addEventListener("message", _workerJobFinished);
       _asingNewJob(worker);
       activeWorkers += 1;
     }
-
-    /* return new Promise((resolve, reject) => {
-      worker.onmessage = result => {
-        resolve(result);
-      };
-    }); */
   }
 
   function _workerJobFinished(result) {
