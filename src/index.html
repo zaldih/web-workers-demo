@@ -8,6 +8,13 @@
     <title>Workers!</title>
   </head>
   <body>
+    <div id="fileProtocolWarning" class="file-protocol-warning">
+      <p>
+        The application will not work! It is necessary for workers that the site runs on the http/s protocol
+      </p>
+      <p>run <b>"npm run start"</b> instead ;)</p>
+    </div>
+    
     <main>
         <div class="form">
           <label for="">Workers amount: </label>
@@ -34,4 +41,14 @@
     </main>
   </body>
   <script src="main.controller.js"></script>
+
+
+  <!--  Workers only work when the site works on http or https,
+        so here we will check that the application can be used.
+  -->
+  <script>
+    if(window.location.protocol !== "file:"){
+      document.getElementById("fileProtocolWarning").style.display = "none";
+    }
+  </script>
 </html>
