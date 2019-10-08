@@ -4,8 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "http-serve ./src -p 8080 -o",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "juanT",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "http-serve": "^1.0.1"
+  }
 }
